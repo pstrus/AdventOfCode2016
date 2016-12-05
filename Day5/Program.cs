@@ -9,15 +9,19 @@ namespace Day5
 {
     class Program
     {
+
+
         static void Main(string[] args)
         {
             // given, a password in a string
             string password = @"reyedfim";
             string FinalPassword = String.Empty;
+
+            var FinalPwdPartTwo = new string[8];
    
             int counter = 0;
 
-            for (int i = 0; i < 10000000; i++)
+            for (int i = 0; i < 100000000; i++)
             {
               
                 string pwd = password + i.ToString();
@@ -30,8 +34,17 @@ namespace Day5
 
                 if (encoded.Substring(0, 5) == "00000")
                 {
-                    FinalPassword += encoded.Substring(5, 1);
-                    counter++;
+                    int position; 
+                    if (int.TryParse(encoded.Substring(5, 1), out position) && position >=0 && position<8)
+                    {
+                        if (FinalPwdPartTwo[position] == null)
+                        {
+                            FinalPwdPartTwo[position] = encoded.Substring(6, 1);
+                            counter++;
+                        }
+
+                    }
+                   
                 }
 
                 if (counter == 8)
@@ -41,7 +54,10 @@ namespace Day5
 
 
 
-            Console.WriteLine(FinalPassword);
+            foreach (var item in FinalPwdPartTwo)
+            {
+                Console.Write(item);
+            }
             Console.ReadKey();
         }
     }
