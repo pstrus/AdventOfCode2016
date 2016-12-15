@@ -13,7 +13,10 @@ namespace Day11
         {
             var input = File.ReadAllLines("Input.txt");
             int counter = 0;
-            var Registers = new Dictionary<char, int>();
+            var Registers = new Dictionary<char, int>();      
+            //part2 If you instead initialize register c to be 1, what value is now left in register a?
+            Registers['c'] = 1;
+
             long iterationCounter = 0;
                 while (counter < input.Count())
                 {
@@ -60,7 +63,7 @@ namespace Day11
                     }
                 
                 iterationCounter++;
-                Console.WriteLine(iterationCounter);
+
 
 
                 
