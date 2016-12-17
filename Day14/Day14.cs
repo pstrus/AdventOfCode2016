@@ -17,23 +17,25 @@ namespace Day14
             int counter = 0;
             int increment = 10000;
             List<string> MD5HashesList = new List<string>();
-
             List<int> ResultIndicies = new List<int>();
+
+            bool isPartTwo = true;
 
             while (ResultIndicies.Count < 64)
             {
-                MD5HashesList = AddMD5Hashes(MD5HashesList, increment, input);
+                MD5HashesList = AddMD5Hashes(MD5HashesList, increment, input, isPartTwo);
                 for (int i = counter; i < counter + increment - 1000; i++)
                 {
 
+                    int a = i;
                     if (Regex.IsMatch(MD5HashesList[i], @"(.)\1\1"))
                     {
-                        char char3timesInARow = Regex.Match(MD5HashesList[i], @"(.)\1\1").ToString()[0];
+                        char char3timesInARow = Regex.Match(MD5HashesList[a], @"(.)\1\1").ToString()[0];
 
-                        bool ElementRepeated5TimesExists = MD5HashesList.Skip(i+1).Take(1000).Any(item => CharRepeated5Times(item, char3timesInARow)); //Regex.IsMatch(item, @"([^" + char3timesInARow + @"])" + @"\1\1\1\1"));
+                        bool ElementRepeated5TimesExists = MD5HashesList.Skip(a+1).Take(1000).Any(item => CharRepeated5Times(item, char3timesInARow)); //Regex.IsMatch(item, @"([^" + char3timesInARow + @"])" + @"\1\1\1\1"));
 
 
-                        if (ElementRepeated5TimesExists) ResultIndicies.Add(i);
+                        if (ElementRepeated5TimesExists) ResultIndicies.Add(a);
                         
                     }
 
@@ -61,15 +63,26 @@ namespace Day14
             return encoded;
         }
 
-        public static List<string> AddMD5Hashes(List<string> list,int noOfTimes, string input)
+        public static List<string> AddMD5Hashes(List<string> list,int noOfTimes, string input, bool isPartTwo)
         {
             List<string> newList = list;
             int currentCount = list.Count;
-            for (int i = currentCount; i < currentCount+noOfTimes; i++)
-            {
-                newList.Add(GetMD5Hash(input + i.ToString()));
 
+
+            for (int i = currentCount; i < currentCount + noOfTimes; i++)
+            {
+                string newHash = GetMD5Hash(input + i.ToString());
+                if (isPartTwo)
+                {
+                    for (int j = 0; j < 2016; j++)
+                    {
+                        newHash = GetMD5Hash(newHash);
+                    }
+                }
+                newList.Add(newHash);
+                
             }
+
             return newList;
 
 
