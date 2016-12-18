@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,11 @@ namespace Day18
         {
             string input = @".^^^.^.^^^.^.......^^.^^^^.^^^^..^^^^^.^.^^^..^^.^.^^..^.^..^^...^.^^.^^^...^^.^.^^^..^^^^.....^....";
             // for part one use 40-1
+
             int noOfAdditionalRows = 400000 - 1;
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
 
             string[] rows = new string[noOfAdditionalRows + 1];
             rows[0] = input;
@@ -26,14 +31,16 @@ namespace Day18
             int dotCount = 0;
             foreach (var row in rows)
             {
-                Console.WriteLine(row);
+                //Console.WriteLine(row);
                 foreach (var character in row)
                 {
                     if (character == '.') dotCount++;
                 }
 
             }
-            Console.WriteLine("safe spot count = " + dotCount);
+            sw.Stop();
+            Console.WriteLine("safe spot count = " + dotCount + ", time elapsed: =" + sw.Elapsed);
+            //46 secs originally, 4.6 without Console.WriteLine
             Console.ReadKey();
 
         }
