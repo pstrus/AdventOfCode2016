@@ -40,21 +40,21 @@ namespace Day18
             }
             sw.Stop();
             Console.WriteLine("safe spot count = " + dotCount + ", time elapsed: =" + sw.Elapsed);
-            //46 secs originally, 4.6 without Console.WriteLine
+            //46 secs originally, 4.6 without Console.WriteLine, 2.5 secs when using StringBuilder
             Console.ReadKey();
 
         }
 
         private static string CreateNewRow(string previousRow)
         {
-            string result = string.Empty;
+            StringBuilder result = new StringBuilder();
             for (int i = 0; i < previousRow.Length; i++)
             {
-                if (i == 0) result += GetNextTrapOrSafeSpot('.', previousRow[i], previousRow[i + 1]);
-                else if (i < previousRow.Length-1) result += GetNextTrapOrSafeSpot(previousRow[i-1], previousRow[i], previousRow[i + 1]);
-                else result += GetNextTrapOrSafeSpot(previousRow[i - 1], previousRow[i], '.');
+                if (i == 0) result.Append( GetNextTrapOrSafeSpot('.', previousRow[i], previousRow[i + 1]));
+                else if (i < previousRow.Length-1) result.Append( GetNextTrapOrSafeSpot(previousRow[i-1], previousRow[i], previousRow[i + 1]));
+                else result.Append(  GetNextTrapOrSafeSpot(previousRow[i - 1], previousRow[i], '.'));
             }
-            return result;
+            return result.ToString();
         }
 
         private static char GetNextTrapOrSafeSpot(char v1, char v2, char v3)
