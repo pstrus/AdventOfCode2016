@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,21 @@ namespace Day19
     {
         static void Main(string[] args)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
 
             int noOfElves = 3014387;
+
             int[] Elves = new int[noOfElves / 2 +1 ];
             Elves[0] = noOfElves;
             for (int i = 1; i <= noOfElves /2   ; i++) Elves[i] =  2*i -1  ;
+
             while (Elves.Count() > 1) Elves = RemoveElves(Elves);
+
+            sw.Stop();
+
             Console.WriteLine(Elves[0]);
+            Console.WriteLine("Time elapsed = " + sw.Elapsed);
             Console.ReadKey();
             
         }
