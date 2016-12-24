@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Day17
 {
-    class Day18
+    class Day17
     {
         static void Main(string[] args)
         {

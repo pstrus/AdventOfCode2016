@@ -243,3 +243,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Day13/day133.cs
+/Day13/Day13.csproj
+/Day13/Properties/AssemblyInfo.cs
+/Day13/App.config
